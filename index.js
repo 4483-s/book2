@@ -2,10 +2,6 @@ const addButton = document.querySelector(".add");
 const dialog = document.querySelector("dialog");
 const confirm = document.querySelector(".confirm");
 const cancel = document.querySelector(".cancel");
-const bookTitle = document.querySelector("#title");
-const bookAuthor = document.querySelector("#author");
-const bookPages = document.querySelector("#pages");
-const bookRead = document.querySelector("#read");
 const table = document.querySelector(".table");
 const refresh = document.querySelector(".refresh");
 const myLibrary = [];
@@ -18,7 +14,7 @@ function displayBooks(arr) {
     table.removeChild(table.children[1]);
   }
   for (let v of arr) {
-    addItem(v, arr);
+    domAddItem(v);
   }
 }
 //dialog control
@@ -27,9 +23,14 @@ addButton.addEventListener("click", () => {
 });
 cancel.addEventListener("click", () => {
   dialog.close();
-  clearValue();
+  document.forms[0].reset();
 });
 confirm.addEventListener("click", () => {
+  // require only title
+  const bookTitle = document.querySelector("#title");
+  const bookAuthor = document.querySelector("#author");
+  const bookPages = document.querySelector("#pages");
+  const bookRead = document.querySelector("#read");
   if (bookTitle.value) dialog.close();
   else {
     return;
@@ -40,15 +41,10 @@ confirm.addEventListener("click", () => {
     bookPages.value,
     bookRead.value === "notread" ? false : true,
   );
-  clearValue();
-  addItem(myLibrary[myLibrary.length - 1], myLibrary);
+  document.forms[0].reset();
+  domAddItem(myLibrary[myLibrary.length - 1]);
 });
-function clearValue() {
-  bookRead.value = "read";
-  bookTitle.value = "";
-  bookAuthor.value = "";
-  bookPages.value = "";
-}
+
 //Book constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -65,11 +61,11 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook);
 }
 //take and object then append the item on the table
-function addItem(v, arr) {
+function domAddItem(v) {
   const item = document.createElement("div");
   const title = document.createElement("div");
-  const author = document.createElement("div");
   const pages = document.createElement("div");
+  const author = document.createElement("div");
   const status = document.createElement("input");
   const statusDiv = document.createElement("div");
   const deleteBtn = document.createElement("button");
@@ -77,14 +73,13 @@ function addItem(v, arr) {
   title.textContent = v.title;
   author.textContent = v.author;
   pages.textContent = v.pages;
+  deleteBtn.textContent = "Delete";
   status.addEventListener("click", () => (v.read = v.read ? false : true));
   status.type = "checkbox";
   if (v.read) status.checked = true;
   else {
     status.checked = false;
   }
-  deleteBtn.textContent = "Delete";
-
   statusDiv.appendChild(status);
   deleteBtnDiv.appendChild(deleteBtn);
   deleteBtn.setAttribute("data-uuid", v.UUID);
@@ -94,6 +89,7 @@ function addItem(v, arr) {
 table.addEventListener("click", (e) => {
   deleteItem(e, myLibrary);
 });
+
 function deleteItem(e, arr) {
   if (e.target.getAttribute("data-uuid")) {
     arr.splice(

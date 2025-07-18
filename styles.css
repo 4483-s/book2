@@ -45,6 +45,14 @@ input[type="text"] {
   border-radius: 6px;
   margin: 1em;
 }
+.topbuttons:hover {
+  background-color: #80ce50;
+}
+.topbuttons:active {
+  position: relative;
+  top: 1px;
+  left: 1px;
+}
 .table {
   color: white;
   display: flex;
@@ -73,4 +81,12 @@ input[type="checkbox"] {
   accent-color: green;
   width: 2em;
   height: 2em;
+}
+.table button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 0.4em;
+  font-size: 1.1rem;
+  border-radius: 5px;
 }
