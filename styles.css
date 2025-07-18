@@ -1,0 +1,35 @@
+@import url(./reset.css);
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+dialog[open] {
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10%;
+  border: 2px solid #eeeeee;
+  gap: 0.7em;
+  padding: 2em;
+}
+select {
+  background-color: skyblue;
+  border-radius: 4%;
+  border: none;
+  height: 2em;
+}
+option {
+  background-color: yellow;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+input {
+  border: 2px solid #eeeeee;
+}
+input[type="text"] {
+  border-radius: 6px;
+}

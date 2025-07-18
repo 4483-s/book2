@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="add">Add Book</button>
+    <dialog>
+      <label for="title">Title: <input type="text" id="title" required /></label
+      ><label for="author">Author: <input type="text" id="author" /></label>
+      <label for="pages">Pages: <input type="number" id="pages" /></label>
+
+      <select name="read" id="read">
+        <option value="read">Read</option>
+        <option value="notread">Not Read</option>
+      </select>
+      <div>
+        <button class="confirm">Confirm</button
+        ><button class="cancel">Cancel</button>
+      </div>
+    </dialog>
+    <div class="table"></div>
+    <script src="./index.js"></script>
+  </body>
+</html>
