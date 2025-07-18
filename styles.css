@@ -3,15 +3,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #1c1b22;
 }
-dialog[open] {
+dialog[open] > form {
   font-size: 1.3rem;
   display: flex;
   flex-direction: column;
-  border-radius: 10%;
-  border: 2px solid #eeeeee;
   gap: 0.7em;
   padding: 2em;
+}
+dialog[open] {
+  border: 2px solid #eeeeee;
+  border-radius: 2rem;
+  background-color: lightblue;
 }
 select {
   background-color: skyblue;
@@ -32,4 +36,41 @@ input {
 }
 input[type="text"] {
   border-radius: 6px;
+}
+.topbuttons {
+  font-size: 1.6rem;
+  padding: 0.3em;
+  background-color: skyblue;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+  margin: 1em;
+}
+.table {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 0.4em;
+}
+.table > * {
+  background-color: orange;
+  border-radius: 9px;
+  font-size: 2rem;
+  padding: 0.7em;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+}
+.table > * > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table > div:first-child {
+  background-color: grey;
+}
+input[type="checkbox"] {
+  accent-color: green;
+  width: 2em;
+  height: 2em;
 }
