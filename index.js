@@ -15,7 +15,6 @@ refresh.addEventListener("click", () => {
 });
 function displayBooks(arr) {
   while (table.children[1]) {
-    console.log(table.children[1]);
     table.removeChild(table.children[1]);
   }
   for (let v of arr) {
@@ -57,10 +56,10 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   this.UUID = crypto.randomUUID();
-  this.info = function () {
-    return `${this.title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`;
-  };
 }
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`;
+};
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
@@ -85,16 +84,26 @@ function addItem(v, arr) {
     status.checked = false;
   }
   deleteBtn.textContent = "Delete";
-  deleteBtn.addEventListener("click", () => {
-    item.remove();
-    arr.splice(
-      arr.findIndex((value) => value.UUID === v.uuid),
-      1,
-    );
-  });
+
   statusDiv.appendChild(status);
   deleteBtnDiv.appendChild(deleteBtn);
-  item.setAttribute("data-uuid", v.UUID);
+  deleteBtn.setAttribute("data-uuid", v.UUID);
   item.append(title, author, pages, statusDiv, deleteBtnDiv);
   table.appendChild(item);
+}
+table.addEventListener("click", (e) => {
+  deleteItem(e, myLibrary);
+});
+function deleteItem(e, arr) {
+  if (e.target.getAttribute("data-uuid")) {
+    arr.splice(
+      arr.findIndex(
+        (value) => value.UUID === e.target.getAttribute("data-uuid"),
+      ),
+      1,
+    );
+    e.target.parentElement.parentElement.remove();
+  } else {
+    return;
+  }
 }
